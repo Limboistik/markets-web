@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Navigation from './components/Navigation/Navigation';
+import CoinList from './components/CoinList/CoinList';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = { 
+      isLoading: true,
+      coinList: [],
+      error: null
+    }
+  }
+  
+  componentDidMount() {
+    fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,DASH&tsyms=BTC,USD,EUR')
+    .then(response => response.json())
+    .then(coins => this.setState({ 
+        isLoading: false, 
+        coinList: [coins]
+      }))
+    .catch(error => this.setState({ error: true }));
+  }
+
   render() {
+    const { error, isLoading, coinList }  = this.state;
     return (
       <div className="App">
+        <Navigation />
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Markets</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        { error ? <h1>Error fetching coins</h1> :
+          isLoading ? <h1>Fetching coins</h1> : 
+          <CoinList coins={coinList} />
+        }
       </div>
     );
   }

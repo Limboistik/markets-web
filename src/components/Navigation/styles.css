@@ -1,0 +1,20 @@
+.navigation {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+.links-list {
+  display: inline-block;
+  margin: 0;
+}
+.links-list li {
+  display: inline-block;
+  margin: 0 1rem;
+  height: 100%;
+}
+.links-list li a {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin: 0 1rem;
+}
