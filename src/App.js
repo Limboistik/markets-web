@@ -7,20 +7,20 @@ class App extends Component {
 
   constructor(props){
     super(props);
-    this.state = { 
+    this.state = {
       isLoading: true,
       coinList: [],
-      error: null
+      error: false
     }
   }
-  
+
   componentDidMount() {
     fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,DASH&tsyms=BTC,USD,EUR')
     .then(response => response.json())
-    .then(coins => this.setState({ 
-        isLoading: false, 
-        coinList: [coins]
-      }))
+    .then(coins => this.setState({
+        isLoading: false,
+        coinList: coins
+    }))
     .catch(error => this.setState({ error: true }));
   }
 
@@ -32,9 +32,10 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Markets</h1>
         </header>
-        { error ? <h1>Error fetching coins</h1> :
-          isLoading ? <h1>Fetching coins</h1> : 
-          <CoinList coins={coinList} />
+        {
+          error ? <h1>Error fetching coins</h1> :
+          isLoading ? <h1>Fetching coins</h1> :
+          <CoinList coins={coinList}/>
         }
       </div>
     );
