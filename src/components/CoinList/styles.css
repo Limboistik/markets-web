@@ -1,12 +1,17 @@
-.coin-list {
+.coinlist {
   max-width: 1000px;
   margin: 0 auto;
 }
-.coin-list-header {
+.coinlist-header {
   background: lightgray;
   display: flex;
   flex-direction: row;
   padding:0.25rem 1.6rem;
+  justify-content: space-between;
+}
+.coinlist-header-label {
+  display: inline-block;
+  font-size: 12px;
 }
 .coin-card {
   background: #fff;

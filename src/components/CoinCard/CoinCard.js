@@ -8,16 +8,15 @@ const CoinCard = ({coinName, coin}) => {
   let coinArr = Object.keys(coin);
 
   return (
-    <div>
-      <h1>{coinName}</h1>
+    <div class="coin-card">
+      <p className="coin-name">{coinName}</p>
       {
-        coinArr.map((currency,i) => {
+        coinArr.map((currency, i) => {
           return(
-            <Currency
-               key={i}
-               currencyName={currency}
-               currency={coin[currency]}
-            />
+            <p className="coin-usd" key={i}>
+              {currency}
+              {coin[currency]}
+            </p>
           )
         })
       }
